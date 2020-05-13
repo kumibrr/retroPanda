@@ -1,2 +1,85 @@
-.login{width: 35%; height: 500px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 300px;}
-.login-form{position: absolute; top: 110%;}
+.login{
+    width: 35%;
+    height: 500px;
+    min-height: 500px;
+    max-height: 500px;
+    min-width: 450px;
+    max-width: 450px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 300px;
+}
+.login-form{
+    position: absolute;
+    max-height: 180px;
+    width: 20%;
+    top: 100%;
+}
+
+.panda-logo{
+    position: absolute;
+    /* width must be half of height always to keep image cool */
+    width: 40%;
+    height: 50%;
+    left: 25%;
+    top: 5%;
+    z-index: 0;
+}
+
+.p-paw{
+    position: absolute;
+}
+
+.p-Lpaw{
+    width: 25%;
+    top: 42%;
+    left: 15%;
+}
+
+.p-Rpaw{
+    width: 30%;
+    top: 42%;
+    left: 50%;
+}
+
+.p-controller{
+    position: absolute;
+    width: 70%;
+    height: 50%;
+    top: 42%;
+    left: -10%;
+}
+
+.p-body{
+    position: absolute;
+    width: 100%;
+}
+
+.pupil{
+    position: absolute;
+    width: 3%;
+    height: 3%;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.pupil-l{
+    position: absolute;
+    left: 57%;
+    top: 20%;
+    z-index: 1;
+}
+
+.pupil-r{
+    position: absolute;
+    left: 35%;
+    top: 21%;
+    z-index: 1;
+}
+
+button{
+    border-width: 0px;
+}
+
