@@ -1,85 +1,92 @@
-.login{
+.login-c{
     width: 35%;
-    height: 500px;
     min-height: 500px;
-    max-height: 500px;
-    min-width: 450px;
+    max-height: 600px;
+    min-width: 350px;
     max-width: 450px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    min-width: 300px;
+    text-align: center;
 }
 .login-form{
     position: absolute;
-    max-height: 180px;
-    width: 20%;
-    top: 100%;
+    height: 180px;
+    width: 60%;
+    top: 60%;
+    left: 20%;
 }
 
 .panda-logo{
     position: absolute;
-    /* width must be half of height always to keep image cool */
-    width: 40%;
-    height: 50%;
-    left: 25%;
-    top: 5%;
+    width: 170px;
+    height: 100%;
+    top: 50px;
     z-index: 0;
 }
 
-.p-paw{
+.p-head{
+    display: inline-block;
     position: absolute;
+    width: 120%;
 }
 
-.p-Lpaw{
-    width: 25%;
-    top: 42%;
-    left: 15%;
+.pauseanimation{
+    animation-play-state: paused;
 }
 
-.p-Rpaw{
-    width: 30%;
-    top: 42%;
-    left: 50%;
+.animateheadIn{
+    animation-name: FocusOnFormControlHead;
+    animation-duration: 400ms;
+    animation-fill-mode: forwards;
 }
 
-.p-controller{
-    position: absolute;
-    width: 70%;
-    height: 50%;
-    top: 42%;
-    left: -10%;
-}
-
-.p-body{
-    position: absolute;
-    width: 100%;
+@keyframes FocusOnFormControlHead{
+    50%{
+        transform: rotate(-4deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
 }
 
 .pupil{
-    position: absolute;
-    width: 3%;
+    display: inline-block;
+    position: relative;
+    width: 8%;
     height: 3%;
     background-color: black;
     border-radius: 50%;
+
 }
 
 .pupil-l{
-    position: absolute;
-    left: 57%;
-    top: 20%;
+    display: inline-block;
+    position: relative;
+    left: 155px;
+    top: 67px;
     z-index: 1;
 }
 
 .pupil-r{
-    position: absolute;
-    left: 35%;
-    top: 21%;
+    display: inline-block;
+    position: relative;
+    left: 65px;
+    top: 76px;
     z-index: 1;
+    
 }
 
-button{
-    border-width: 0px;
+.loginbtn{
+    position: absolute;
+    left: 100%;
+    top: 55%;
+    width: 60px;
 }
 
+.signupbtn{
+    position: absolute;
+    left: -32%;
+    top: 85%;
+}
