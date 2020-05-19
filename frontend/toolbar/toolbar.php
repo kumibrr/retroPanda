@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="toolbar.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-xl navbar-light bg-light fixed-top">
-        <a class="navbar-brand" href="#">Logo</a>
+    <nav class="navbar navbar-expand-xl navbar-light bg-light fixed-top navbar-size">
+        <a class="navbar-brand" href="#"><img class="logo" src="../../assets/logo.png"></a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
             <span class="navbar-toggler-icon"></span>
         </button> 
@@ -34,10 +34,31 @@
             </ul>
             <ul class="navbar-nav ml-auto nav-flex-icons">
                 <form class="form-inline mr-5">
-                    <input class="form-control mr-sm-2" type="text">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
                 </form>
-                <li class="nav-item mt-1">
-                    <label class="nav-link">username<img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" class="rounded-circle z-depth-0 size1 ml-2" alt="avatar image"></label>
+                <li class="nav-item mt-1 user-info">
+                    <!--<label class="nav-link">username<img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" class="rounded-circle z-depth-0 size1 ml-2" alt="avatar image"></label>-->
+                    
+                        <?php
+                            $servername = "https://myadmin.nigel1.cloud";
+                            $db_username = "retropanda";
+                            $db_password = "1dam";
+                            $db_name = "RETROPANDA";
+
+                            $connection = mysqli_connect($servername,$db_username,$db_password,$db_name);
+
+                            //TODO: Aquí se haría todo lo que tiene que ver con obtener el usuario de la base de datos y
+                            //meterla en la supervariable.
+                            echo "<label class='nav-link'>";
+                            
+                            //TODO: Aquí se tendría que conseguir la ruta de la imagen de perfil del usuario y
+                            //conseguirla también. Hay que aplicar las clases 
+
+                            echo "</label>";
+
+                            mysqli_close($connection);
+                        ?>
+                    
                 </li>
             </ul>
         </div>
