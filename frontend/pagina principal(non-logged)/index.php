@@ -37,11 +37,53 @@
                     <input class="form-control mr-sm-2" type="text">
                 </form>
                 <li class="nav-item mt-1">
-                    <label class="nav-link">username<img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" class="rounded-circle z-depth-0 size1 ml-2" alt="avatar image"></label>
+                    <a class="nav-link" href="#">Inciar Sesion</a>
                 </li>
             </ul>
         </div>
     </nav>
     
+    <div style="text-align:center; padding-top:6%;border-bottom:green;">
+    <h1  style="text-align:left;color:red">Wanted</h1>
+        <?php
+        // Datos de la base de datos
+        $usuario = "retropanda";
+        $password = "1dam";
+        $servidor = "localhost";
+        $basededatos = "retropanda";
+        
+        // creación de la conexión a la base de datos con mysql_connect()
+        $conexion = mysqli_connect( $servidor, $usuario, $password ) or die ("No se ha podido conectar al servidor de Base de datos");
+
+        $resultado = mysqli_query( $conexion, "SET NAMES 'utf8'" ) or die ( "Algo ha ido mal en la consulta");
+
+        // Selección de la base de datos a utilizar
+        $db = mysqli_select_db( $conexion, $basededatos ) or die ( "Upps! Pues va a ser que no se ha podido conectar a la base de datos" );
+
+        $consulta = "SELECT * FROM JUEGO";
+
+        $resultado = mysqli_query( $conexion, $consulta ) or die ( "Algo ha ido mal en la consulta $consulta");
+        while ($mostrar=mysqli_fetch_array($resultado)) {
+            ?>
+            <div style="float:left">
+            <img src=<?php echo $mostrar['CARATULA']?> style="width:30%">
+            <h2><?php echo $mostrar['NOMBRE']?></h1>
+            <h4><?php echo $mostrar['GENERO1']?></p>
+            <h5><?php echo $mostrar['FECHA_PUBLICACION']?></p>
+            <h5> Pais: <?php echo $mostrar['REGION1']?></p>
+
+            </div>
+        
+        <?php
+        }
+        ?>
+
+
+    </div>
+
+    <div>
+
+    
+    </div>
 </body>
 </html>
