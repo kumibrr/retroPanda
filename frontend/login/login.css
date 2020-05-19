@@ -18,6 +18,27 @@
     left: 20%;
 }
 
+.signup-c{
+    width: 35%;
+    min-height: 700px;
+    max-height: 700px;
+    min-width: 350px;
+    max-width: 450px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.signup-form{
+    position: absolute;
+    height: 160px;
+    width: 60%;
+    top: 50%;
+    left: 20%;
+}
+
 .panda-logo{
     position: absolute;
     width: 170px;
@@ -84,10 +105,17 @@
     top: 25px;
 }
 
-.loginbtn{
+.loginsubmitbtn{
     position: absolute;
     left: 100%;
     top: 55%;
+    width: 60px;
+}
+
+.signupsubmitbtn{
+    position: absolute;
+    left: 100%;
+    top: 150%;
     width: 60px;
 }
 
@@ -95,4 +123,10 @@
     position: absolute;
     left: -32%;
     top: 85%;
+}
+
+.loginbtn{
+    position: absolute;
+    left: -32%;
+    top: 190%;
 }

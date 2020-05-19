@@ -76,6 +76,30 @@ function main(){
 
     });
 
+    document.querySelector('.modebtn').addEventListener('click',(e)=>{
+        if($('.modebtn').hasClass('signupbtn')){
+            $('.login-c').addClass('signup-c').removeClass('login-c');
+            $('.login-form').addClass('signup-form').removeClass('login-form');
+            $('.loginsubmitbtn').addClass('signupsubmitbtn').removeClass('loginbtn');
+            $('.signupbtn').text('Log-in').addClass('loginbtn').removeClass('signupbtn');
+            
+            document.querySelectorAll('.retype').forEach(item=>{
+                item.removeAttribute('hidden');
+            });
+        } else{
+            $('.signup-c').addClass('login-c').removeClass('signup-c');
+            $('.signup-form').addClass('login-form').removeClass('signup-form');
+            $('.signupsubmitbtn').addClass('loginsubmitbtn').removeClass('signupsubmitbtn');
+            $('.loginbtn').text('Sign-Up').addClass('signupbtn').removeClass('loginbtn');
+            
+            document.querySelectorAll('.retype').forEach(item=>{
+                item.setAttribute('hidden',null);
+            });
+        }
+
+        e.preventDefault();
+    });
+
 }
 
 window.addEventListener('load',main);

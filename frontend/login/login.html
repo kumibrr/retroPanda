@@ -23,14 +23,17 @@
         <div>
             <img class="logo" src="../../assets/logo.png">
         </div>
-        <form class="form-group login login-form" action="#" method="post">
+        <form class="form-group login login-form" action="authentication.php" method="POST">
             <label>username:</label>
-            
-            <input class="form-control" type="text" name="login" id="username">
+            <input class="form-control" type="text" name="username" id="username">
+            <label hidden class="retype">email:</label>
+            <input hidden class="retype form-control" type="text" name="email" id="email" >
             <label>password:</label>
-            <input class="form-control" type="password" name="login" id="password">
-            <button class="btn loginbtn btn-link"><i class="fas fa-arrow-circle-right fa-2x"></i></button>
-            <button class="btn signupbtn btn-link">Sign-up</button>
+            <input class="form-control" type="password" name="password" id="password">
+            <label class="retype" hidden>retype password:</label>
+            <input hidden class="form-control retype" type="password" name="login" id="password-conf">
+            <button class="btn loginsubmitbtn btn-link"><i class="fas fa-arrow-circle-right fa-2x"></i></button>
+            <button class="btn modebtn signupbtn btn-link">Sign-up</button>
         </form>
     </div>
     
