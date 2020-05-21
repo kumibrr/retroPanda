@@ -49,4 +49,4 @@ INSERT INTO `JUEGO` (
     `CARATULA`, 
     `ID_DESARROLLADORA`
 ) 
-VALUES ('2', 'Super Mario 64', 'AVENTURAS', NULL, NULL, NULL, '1996-05-23', 'Japon', NULL, NULL, NULL, 'img/supermario.jpg', '1');
+VALUES ('2', 'Super Mario 64', 'AVENTURAS', NULL, NULL, NULL, '1996-05-23', 'Japon', NULL, NULL, NULL, 'img/supermario64.jpg', '1');
