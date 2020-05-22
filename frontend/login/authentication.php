@@ -27,7 +27,8 @@ if($result = mysqli_query($connection,$query)){
         $_SESSION['login_user'] = $username;
         header("location: confirmLogin.php");
     } else {
-        echo "La base de datos ha devuelto resultados inesperados.";
+        echo "El usuario o contraseña no son correctos.";
+        echo "<br><br><a href='login.html'>Volver</a>";
     }
 } else{
     echo "ha fallado algo :( " .mysqli_error($connection);
