@@ -25,12 +25,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Explore</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">My Library</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Emulators</a>
-                </li>
             </ul>
             <ul class="navbar-nav ml-auto nav-flex-icons">
                 <form class="form-inline mr-5">
@@ -76,12 +70,51 @@
         
         <?php
         }
+        mysqli_close($conexion) or die("No se ha podido cerrar la conexión $conexion");
         ?>
 
 
     </div>
+        <br>
+    <div style="padding-top:7%;border-bottom:green;">
+    <h1  style="text-align:left;color:red">Valoraciones</h1>
+        <?php
+        // Datos de la base de datos
+        $usuario = "retropanda";
+        $password = "1dam";
+        $servidor = "localhost";
+        $basededatos = "retropanda";
+        
+        // creación de la conexión a la base de datos con mysql_connect()
+        $conexion = mysqli_connect( $servidor, $usuario, $password ) or die ("No se ha podido conectar al servidor de Base de datos");
 
-    <div>
+        $resultado = mysqli_query( $conexion, "SET NAMES 'utf8'" ) or die ( "Algo ha ido mal en la consulta");
+
+        // Selección de la base de datos a utilizar
+        $db = mysqli_select_db( $conexion, $basededatos ) or die ( "Upps! Pues va a ser que no se ha podido conectar a la base de datos" );
+
+        $consulta = "
+        SELECT usuario.USERNAME,juego.NOMBRE,valoracion_juego_usuario.VALORACION
+        FROM `usuario`,`valoracion_juego_usuario`,`juego`
+        WHERE valoracion_juego_usuario.ID_JUEGO=juego.ID_JUEGO AND valoracion_juego_usuario.ID_USUARIO=usuario.ID_USUARIO;";
+
+        $resultado = mysqli_query( $conexion, $consulta ) or die ( "Algo ha ido mal en la consulta $consulta");
+        while ($mostrar=mysqli_fetch_array($resultado)) {
+            ?>
+            <div style="border-color: green;border-width: 7px;border-bottom-style: solid;">
+                <h2>Usuario</h2>
+                <h4 style="color:blue"><?php echo $mostrar['USERNAME']?></h4>
+                <h2>Juego</h2>
+                <h4 style="color:blue"><?php echo $mostrar['NOMBRE']?></h4>
+                <h2>Valoracion</h2>
+                <h4 style="color:blue"><?php echo $mostrar['VALORACION']?></h4>
+
+            </div>
+        
+        <?php
+        }
+        mysqli_close($conexion) or die("No se ha podido cerrar la conexión $conexion");
+        ?>
 
     
     </div>
