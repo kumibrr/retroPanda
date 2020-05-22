@@ -11,31 +11,6 @@
     <link rel="stylesheet" href="css.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-xl navbar-light bg-light fixed-top">
-        <a class="navbar-brand" href="#">Logo</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
-            <span class="navbar-toggler-icon"></span>
-        </button> 
-
-        <div class="collapse navbar-collapse" id="navb">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Explore</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto nav-flex-icons">
-                <form class="form-inline mr-5">
-                    <input class="form-control mr-sm-2" type="text">
-                </form>
-                <li class="nav-item mt-1">
-                    <a class="nav-link" href="#">Inciar Sesion</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
     
     <div style="text-align:center; padding-top:6%;border-bottom:green;">
     <h1  style="text-align:left;color:red">Wanted</h1>

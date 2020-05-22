@@ -21,11 +21,14 @@ $query = "SELECT ID_USUARIO FROM USUARIO WHERE USUARIO.USERNAME = '$username' AN
 
 if($result = mysqli_query($connection,$query)){
     
-    $rows = mysqli_num_rows($result);
+    $row = mysqli_num_rows($result);
     
-    if($rows == 1){
-        $_SESSION['login_user'] = $username;
-        header("location: confirmLogin.php");
+    if($row == 1){
+        session_start();
+        while($fetch = mysqli_fetch_row($result)){
+            $_SESSION["user"] = $fetch[0];
+        }
+        header("location: ../toolbar/toolbar.php");
     } else {
         echo "El usuario o contraseña no son correctos.";
         echo "<br><br><a href='login.html'>Volver</a>";
