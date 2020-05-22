@@ -77,11 +77,13 @@ function main(){
     });
 
     document.querySelector('.modebtn').addEventListener('click',(e)=>{
+        e.preventDefault();
         if($('.modebtn').hasClass('signupbtn')){
             $('.login-c').addClass('signup-c').removeClass('login-c');
             $('.login-form').addClass('signup-form').removeClass('login-form');
-            $('.loginsubmitbtn').addClass('signupsubmitbtn').removeClass('loginbtn');
+            $('.loginsubmitbtn').addClass('signupsubmitbtn').removeClass('loginsubmitbtn');
             $('.signupbtn').text('Log-in').addClass('loginbtn').removeClass('signupbtn');
+            document.querySelector('form').setAttribute('action','sign-up.php');
             
             document.querySelectorAll('.retype').forEach(item=>{
                 item.removeAttribute('hidden');
@@ -91,6 +93,7 @@ function main(){
             $('.signup-form').addClass('login-form').removeClass('signup-form');
             $('.signupsubmitbtn').addClass('loginsubmitbtn').removeClass('signupsubmitbtn');
             $('.loginbtn').text('Sign-Up').addClass('signupbtn').removeClass('loginbtn');
+            document.querySelector('form').setAttribute('action','authentication.php');
             
             document.querySelectorAll('.retype').forEach(item=>{
                 item.setAttribute('hidden',null);
@@ -98,6 +101,10 @@ function main(){
         }
 
         e.preventDefault();
+    });
+
+    document.querySelector('.commit').addEventListener('click',()=>{
+        document.querySelector('form').submit();
     });
 
 }
