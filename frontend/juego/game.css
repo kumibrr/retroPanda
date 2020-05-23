@@ -1,0 +1,35 @@
+.row{
+    position: absolute;
+    top: 10%;
+    left: 7%;
+}
+
+.art{
+    padding-left: 10%;
+    max-width: 300px;
+    max-height: 400px;
+}
+
+.cover h3{
+    padding-left: 30px;
+}
+
+.cover .btn{
+    margin-left: 60px;
+}
+
+.info{
+    padding-left: 10%;
+    padding-right: 10%;
+    max-width: 600px;
+}
+
+.related-art{
+    max-width: 150px;
+    max-height: 150px;
+}
+
+.comment-section{
+    padding-top: 40px;
+    max-width: 500px;
+}
