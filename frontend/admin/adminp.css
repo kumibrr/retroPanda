@@ -1,0 +1,57 @@
+.addGamePanel{
+    background-color: rgb(235, 235, 235);
+    position: relative;
+    margin-top: 10%;
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 90%;
+    left: 5%;
+    padding: 2.5%;
+}
+
+.art{
+
+    max-width: 300px;
+    max-height: 420px;
+}
+
+form{
+    width: 267px;
+    margin-left: 20px;
+}
+
+.submitbtn{
+    margin-left: 150%;
+    margin-top: 190%;
+}
+
+.modifyUserPanel{
+    background-color: rgb(235, 235, 235);
+    position: relative;
+    margin: 2%;
+    width: 90%;
+    left: 5%;
+    padding: 2.5%;
+}
+
+.profilePic{
+    margin: 20px;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    left: 50%;
+}
+
+.submituserbtn{
+    margin-left: 190%;
+    margin-top: 140%;
+}
+
+.modifyGamePanel{
+    background-color: rgb(235, 235, 235);
+    position: relative;
+    margin: 2%;
+    width: 90%;
+    left: 5%;
+    padding: 2.5%;
+}
