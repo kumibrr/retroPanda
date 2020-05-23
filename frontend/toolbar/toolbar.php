@@ -14,13 +14,13 @@ session_start();
     <link rel="stylesheet" href="toolbar.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-xl navbar-light bg-light fixed-top navbar-size">
+    <nav class="navbar navbar-expand-xl navbar-light bg-light fixed-top navbar-size shadow-sm">
         <a class="navbar-brand" href="#"><img class="logo" src="../../assets/logo.png"></a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
             <span class="navbar-toggler-icon"></span>
         </button> 
 
-        <div class="collapse navbar-collapse" id="navb">
+        <div class="collapse navbar-collapse bg-light" id="navb">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Home</a>
