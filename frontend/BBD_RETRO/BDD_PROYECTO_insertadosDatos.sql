@@ -144,9 +144,9 @@ INSERT INTO JUEGO (
 	ID_DESARROlLADORA
 )
 VALUES
-('Super Mario World','Plataformas',NULL,NULL,NULL,'1991-01-01','NTSC','PAL','JPN','AUS','https://images-na.ssl-images-amazon.com/images/I/71IFenZVQ1L._SL1343_.jpg',1),
-('Super Mario Bros','Plataformas',NULL,NULL,NULL,'1987-01-01','NTSC','PAL','JPN','AUS','https://i.ytimg.com/vi/VB6KbX_Bt7M/hqdefault.jpg',2),
-('Super Metroid','Acción',NULL,NULL,NULL,'1994-01-01','NTSC','PAL','JPN','AUS','https://uvejuegos.com/img/caratulas/846/Super-Metroid-SNES-EU.jpg',3),
+('Super Mario World','Plataformas',NULL,NULL,NULL,'1991-01-01','NTSC','PAL','JPN','AUS','img/supermarioworld.jpg',1),
+('Super Mario Bros','Plataformas',NULL,NULL,NULL,'1987-01-01','NTSC','PAL','JPN','AUS','img/supermariobros.jpg',2),
+('Super Metroid','Acción',NULL,NULL,NULL,'1994-01-01','NTSC','PAL','JPN','AUS','img/metroid.jpg',3),
 ('Pokémon Edición Amarilla: Edición Especial Pikachu','Rol',NULL,NULL,NULL,'2000-01-01','NTSC','PAL','JPN','AUS','https://vignette.wikia.nocookie.net/dreampkmn/images/a/a5/Car%C3%A1tula_Pok%C3%A9mon_Amarillo.png/revision/latest/scale-to-width-down/340?cb=20130313213339&path-prefix=es',4),
 ('The Legend of Zelda: Ocarina of Time','Aventuras',NULL,NULL,NULL,'1998-01-01','NTSC','PAL','JPN','AUS','https://media.redadn.es/imagenes/the-legend-of-zelda-ocarina-of-time-wii_80400_pn.jpg',1),
 ('Metal Gear Solid','Acción',NULL,NULL,NULL,'1998-01-01','NTSC','PAL','JPN','AUS','https://i11b.3djuegos.com/juegos/3871/metal_gear_solid/fotos/ficha/metal_gear_solid-2200281.jpg',2),
