@@ -17,7 +17,7 @@ if(!isset($_REQUEST['username'], $_REQUEST['password'])){
 $username = $_REQUEST['username'];
 $password = $_REQUEST['password'];
 
-$query = "SELECT ID_USUARIO FROM USUARIO WHERE USUARIO.USERNAME = '$username' AND USUARIO.PASS = '$password'";
+$query = "SELECT ID_USUARIO FROM USUARIO WHERE USUARIO.USERNAME = '$username' AND USUARIO.PASS = '$password' AND USUARIO.ADMINISTRADOR = true";
 
 if($result = mysqli_query($connection,$query)){
     

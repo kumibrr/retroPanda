@@ -20,7 +20,7 @@ session_start();
         $query = "UPDATE JUEGO SET `NOMBRE` = '$title', `CARATULA` = '$cover', `GENERO1` = '$gender', `FECHA_PUBLICACION` = '$year-01-01', `ID_DESARROLLADORA` = '$dev' WHERE ID_JUEGO = '$gameID'";
 
     if(mysqli_query($connection,$query)){
-        echo "Añadido correctamente";
+        echo "Modificado correctamente";
         header("location: adminp.php");
     }
     } else{

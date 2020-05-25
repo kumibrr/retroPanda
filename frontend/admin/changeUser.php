@@ -19,7 +19,7 @@ session_start();
         $query = "UPDATE USUARIO SET `USERNAME` = '$username', `PASS` = '$pass', `EMAIL` = '$email', `IMAGEN_PERFIL` = '$prof', `BIOGRAFIA` = '$bib' WHERE ID_USUARIO = '$modid'";
 
     if(mysqli_query($connection,$query)){
-        echo "Añadido correctamente";
+        echo "Modificado correctamente";
         header("location: adminp.php");
     }
     } else{
