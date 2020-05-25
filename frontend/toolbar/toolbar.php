@@ -42,7 +42,6 @@ session_start();
                 <li class="nav-item mt-1 user-info">             
                         <?php
                             
-                            $userid = $_SESSION["user"];
                             $servername = "localhost";
                             $db_username = "root";
                             $db_password = "";
@@ -50,16 +49,20 @@ session_start();
 
                             $connection = mysqli_connect($servername,$db_username,$db_password,$db_name);
 
-                            $query = "SELECT USERNAME, IMAGEN_PERFIL FROM USUARIO WHERE ID_USUARIO = '$userid'";
+                            if(!isset($_SESSION)){
+                                $userid = $_SESSION["user"];
+                                $query = "SELECT USERNAME, IMAGEN_PERFIL FROM USUARIO WHERE ID_USUARIO = '$userid'";
 
-                            if($result = mysqli_query($connection,$query)){
-                                echo "<label class='nav-link'>";
-                                while ($row = mysqli_fetch_row($result)) {
-                                    echo "$row[0]<img src='$row[1]' class='rounded-circle z-depth-0 size1 ml-2' alt='avatar image'></label>";
+                                if($result = mysqli_query($connection,$query)){
+                                    echo "<label class='nav-link'>";
+                                    while ($row = mysqli_fetch_row($result)) {
+                                        echo "$row[0]<img src='$row[1]' class='rounded-circle z-depth-0 size1 ml-2' alt='avatar image'></label>";
+                                    }
+                                    echo "</label>";
                                 }
-                                echo "</label>";
+                            } else{
+                                echo "<a href='../login/login.html'>Log In</a>";
                             }
-                            mysqli_close($connection);
                         ?>
                     
                 </li>
