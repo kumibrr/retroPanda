@@ -61,7 +61,7 @@
     ?>
 
 <nav class="navbar navbar-expand-xl navbar-light bg-light fixed-top navbar-size shadow-sm">
-        <a class="navbar-brand" href="#"><img class="logo" src="assets/logo.png"></a>
+        <a class="navbar-brand" href="#"><img class="logo" src="../assets/logo.png"></a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
             <span class="navbar-toggler-icon"></span>
         </button> 
@@ -88,18 +88,11 @@
                 <li class="nav-item mt-1 user-info">             
                         <?php
                             
-                            $servername = "localhost";
-                            $db_username = "root";
-                            $db_password = "";
-                            $db_name = "retropanda";
-
-                            $connection = mysqli_connect($servername,$db_username,$db_password,$db_name);
-
                             if(!isset($_SESSION)){
                                 $userid = $_SESSION["user"];
                                 $query = "SELECT USERNAME, IMAGEN_PERFIL FROM USUARIO WHERE ID_USUARIO = '$userid'";
 
-                                if($result = mysqli_query($connection,$query)){
+                                if($result = mysqli_query($conn,$query)){
                                     echo "<label class='nav-link'>";
                                     while ($row = mysqli_fetch_row($result)) {
                                         echo "$row[0]<img src='$row[1]' class='rounded-circle z-depth-0 size1 ml-2' alt='avatar image'></label>";
@@ -107,10 +100,20 @@
                                     echo "</label>";
                                 }
                             } else{
-                                echo "<a href='../login/login.html'>Log In</a>";
+
+                                $query = "SELECT USERNAME, IMAGEN_PERFIL FROM USUARIO WHERE USERNAME = '$usuario'";
+
+                                if($result = mysqli_query($conn,$query)){
+                                    echo "<label class='nav-link'>";
+                                    while ($row = mysqli_fetch_row($result)) {
+                                        echo $row[0]."<img src='$row[1]' class='rounded-circle z-depth-0 size1 ml-2' alt='avatar image'></label>";
+                                    }
+                                    echo "</label>";
+                                }
+                                echo "<div><a href='../pagina principal(non-logged)/index.php'>Log Out</a></div>";
                             }
+
                         ?>
-                    
                 </li>
             </ul>
         </div>
@@ -128,18 +131,31 @@
 
             //CONSULTA BASE DE DATOS: WISHLIST 
 
-            $consulta_wishlist = "SELECT JUEGO.CARATULA, JUEGO.NOMBRE, JUEGO.GENERO1, JUEGO.FECHA_PUBLICACION, JUEGO.REGION1 FROM JUEGO, JUEGO_USUARIO_WISHLIST WHERE JUEGO_USUARIO_WISHLIST.ID_USUARIO LIKE (SELECT USUARIO.ID_USUARIO FROM USUARIO WHERE USUARIO.USERNAME = '$usuario') AND JUEGO_USUARIO_WISHLIST.ID_JUEGO LIKE JUEGO.ID_JUEGO";
+            $consulta_wishlist = "SELECT JUEGO.ID_JUEGO ,JUEGO.CARATULA, JUEGO.NOMBRE, JUEGO.GENERO1, JUEGO.FECHA_PUBLICACION, JUEGO.REGION1 FROM JUEGO, JUEGO_USUARIO_WISHLIST WHERE JUEGO_USUARIO_WISHLIST.ID_USUARIO LIKE (SELECT USUARIO.ID_USUARIO FROM USUARIO WHERE USUARIO.USERNAME = '$usuario') AND JUEGO_USUARIO_WISHLIST.ID_JUEGO LIKE JUEGO.ID_JUEGO";
             $resultado_wishlist = mysqli_query($conn,$consulta_wishlist);
 
             while ($celda = mysqli_fetch_array($resultado_wishlist)){
 
-                echo "<div class=juegos>".
-                     "<img src=".$celda['CARATULA'].">".
-                     "<h2> Nombre: ".$celda['NOMBRE']."</h2>".
-                     "<h4> Genero: ".$celda['GENERO1']."</h4>".
-                     "<h5> Fecha Publicación: ".$celda['FECHA_PUBLICACION']."</h5>".
-                     "<h5> Pais: ".$celda['REGION1']."</h5>".
-                     "</div>";
+                ?>
+
+                <form action="../juego/game.php" method="request">
+
+                    <?php
+
+                    echo "<div name=juego value=".$celda['ID_JUEGO']." class=juegos>".
+                        "<img class=juego src=".$celda['CARATULA'].">".
+                        "<h2> Nombre: ".$celda['NOMBRE']."</h2>".
+                        "<h4> Genero: ".$celda['GENERO1']."</h4>".
+                        "<h5> Fecha Publicación: ".$celda['FECHA_PUBLICACION']."</h5>".
+                        "<h5> Pais: ".$celda['REGION1']."</h5>".
+                        "<input type=submit value=Más>".
+                        "</div>";
+
+                    ?>
+
+                <form>
+
+                <?php
 
             } 
             
@@ -147,49 +163,21 @@
 
     </div>
 
-    <div id="comentarios">
+    <div class="comentarios">
 
         <div id="botonAñadirComentario">
 
-            <h3>Feed</h3>
+            <h1>Feed</h1>
 
             <input type="button" value="Add Feed" id="btn">
 
-        </div>
-
-        <?php
-
-            $consulta_comentarios = "SELECT usuario.USERNAME,juego.NOMBRE,valoracion_juego_usuario.COMENTARIO
-            FROM `usuario`,`valoracion_juego_usuario`,`juego`
-            WHERE valoracion_juego_usuario.ID_JUEGO=juego.ID_JUEGO AND valoracion_juego_usuario.ID_USUARIO=usuario.ID_USUARIO;";
-            $resultado_comentarios = mysqli_query($conn,$consulta_comentarios);
-
-            while ($celda = mysqli_fetch_array($resultado_comentarios)){
-                ?>  
-                <div style="border-color: green;border-width: 7px;border-bottom-style: solid;">
-                    <h2>Usuario</h2>
-                    <h4 style="color:blue"><?php echo $celda['USERNAME']?></h4>
-                    <h2>Juego</h2>
-                    <h4 style="color:blue"><?php echo $celda['NOMBRE']?></h4>
-                    <h2>Valoracion</h2>
-                    <h4 style="color:blue"><?php echo $celda['COMENTARIO']?></h4>
-
-                </div>
-            <?php
-
-            } 
-
-            ?>
-
-    </div>
-    
-    <div id="añadirReseña" class="cajaInvisible">
+            <div id="añadirReseña" class="cajaInvisible">
 
         <form action="añadirReseña.php" method="REQUEST">
 
             <h2>Review</h2>
             <h3>Game:</h3>
-            <select id="juegoReseña" class="juegoSelect">
+            <select name="juegoResena" class="juegoSelect">
 
                 <?php
 
@@ -208,13 +196,44 @@
 
             <h3>Valoración:</h3>
 
-            <textarea id="valoracion" maxlength="100" cols="50">Introduzca su reseña aqui</textarea>
+            <textarea name="valoracion" maxlength="100" cols="50">Introduzca su reseña aqui</textarea>
 
             <input type="submit" value="Enviar Reseña">
 
         <form>
 
+        </div>
+
     </div>
+
+        <?php
+
+            $consulta_comentarios = "SELECT usuario.USERNAME,juego.NOMBRE,valoracion_juego_usuario.COMENTARIO
+            FROM `usuario`,`valoracion_juego_usuario`,`juego`
+            WHERE valoracion_juego_usuario.ID_JUEGO=juego.ID_JUEGO AND valoracion_juego_usuario.ID_USUARIO=usuario.ID_USUARIO;";
+            $resultado_comentarios = mysqli_query($conn,$consulta_comentarios);
+
+            while ($celda = mysqli_fetch_array($resultado_comentarios)){
+                ?>  
+                <div class: style="border-color: green;border-width: 7px;border-bottom-style: solid;">
+                    <h2>Usuario</h2>
+                    <h4 style="color:blue"><?php echo $celda['USERNAME']?></h4>
+                    <h2>Juego</h2>
+                    <h4 style="color:blue"><?php echo $celda['NOMBRE']?></h4>
+                    <h2>Valoracion</h2>
+                    <h4 style="color:blue"><?php echo $celda['COMENTARIO']?></h4>
+
+                </div>
+
+        <?php
+
+            } 
+
+            ?>
+
+    </div>
+    
+    
 
     <?php
 
