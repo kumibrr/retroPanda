@@ -17,8 +17,8 @@
 
         session_start();
 
-        $usuario = 'juanmaco';
-        $_SESSION['user'] = $usuario;
+        $_SESSION['user'] = "misterius563";
+        $usuario = $_SESSION['user'];
         $servername = "localhost";
         $database = "retropanda";
         $username = "root";
@@ -54,7 +54,7 @@
 
         //CONSULTA IMAGEN PERFIL
 
-        $consulta_imagenPerfil = "SELECT IMAGEN_PERFIL FROM USUARIO WHERE USERNAME = ".$_SESSION['user']."";
+        $consulta_imagenPerfil = "SELECT IMAGEN_PERFIL FROM USUARIO WHERE USERNAME = '$usuario'";
         $resultado_imagenPerfil = mysqli_query($conn,$consulta_imagenPerfil);
 
     ?>
@@ -85,7 +85,7 @@
                     <input class="form-control mr-sm-2" type="text">
                 </form>
                 <li class="nav-item mt-1">
-                    <label class="nav-link"><img src=<?php while($fila = mysqli_fetch_array($resultado_imagenPerfil)){ echo $fila[0]; }?> class="rounded-circle z-depth-0 size1 ml-2" alt="avatar image"></label>
+                    <label class="nav-link"><img src=<?php while($fila = mysqli_fetch_array($resultado_imagenPerfil)){ echo $fila['IMAGEN_PERFIL']; }?> class="rounded-circle z-depth-0 size1 ml-2" alt="avatar image"></label>
                 </li>
             </ul>
         </div>
@@ -103,7 +103,7 @@
 
             //CONSULTA BASE DE DATOS: WISHLIST 
 
-            $consulta_wishlist = "SELECT JUEGO.CARATULA, JUEGO.NOMBRE, JUEGO.GENERO1, JUEGO.FECHA_PUBLICACION, JUEGO.REGION1 FROM JUEGO, JUEGO_USUARIO_WISHLIST WHERE JUEGO_USUARIO_WISHLIST.ID_USUARIO LIKE (SELECT USUARIO.ID_USUARIO FROM USUARIO WHERE USUARIO.USERNAME LIKE '.$usuario.') AND JUEGO_USUARIO_WISHLIST.ID_JUEGO LIKE JUEGO.ID_JUEGO";
+            $consulta_wishlist = "SELECT JUEGO.CARATULA, JUEGO.NOMBRE, JUEGO.GENERO1, JUEGO.FECHA_PUBLICACION, JUEGO.REGION1 FROM JUEGO, JUEGO_USUARIO_WISHLIST WHERE JUEGO_USUARIO_WISHLIST.ID_USUARIO LIKE (SELECT USUARIO.ID_USUARIO FROM USUARIO WHERE USUARIO.USERNAME = '$usuario') AND JUEGO_USUARIO_WISHLIST.ID_JUEGO LIKE JUEGO.ID_JUEGO";
             $resultado_wishlist = mysqli_query($conn,$consulta_wishlist);
 
             while ($celda = mysqli_fetch_array($resultado_wishlist)){
@@ -141,23 +141,24 @@
 
             while ($celda = mysqli_fetch_array($resultado_comentarios)){
                 ?>  
-            <div style="border-color: green;border-width: 7px;border-bottom-style: solid;">
-                <h2>Usuario</h2>
-                <h4 style="color:blue"><?php echo $celda['USERNAME']?></h4>
-                <h2>Juego</h2>
-                <h4 style="color:blue"><?php echo $celda['NOMBRE']?></h4>
-                <h2>Valoracion</h2>
-                <h4 style="color:blue"><?php echo $celda['COMENTARIO']?></h4>
+                <div style="border-color: green;border-width: 7px;border-bottom-style: solid;">
+                    <h2>Usuario</h2>
+                    <h4 style="color:blue"><?php echo $celda['USERNAME']?></h4>
+                    <h2>Juego</h2>
+                    <h4 style="color:blue"><?php echo $celda['NOMBRE']?></h4>
+                    <h2>Valoracion</h2>
+                    <h4 style="color:blue"><?php echo $celda['COMENTARIO']?></h4>
 
-            </div>
+                </div>
             <?php
+
             } 
 
-        ?>
+            ?>
 
     </div>
     
-    <div id="añadirReseña" class="cajaInvisible">
+    <div id="añadirReseña" class="cajaVisible">
 
         <form action="añadirReseña.php" method="REQUEST">
 
