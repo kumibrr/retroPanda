@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css.css">
+    <script src="js.js"></script>
 
 </head>
 <body>
@@ -59,13 +60,13 @@
 
     ?>
 
-    <nav class="navbar navbar-expand-xl navbar-light bg-light fixed-top">
-        <a class="navbar-brand" href="#">Logo</a>
+<nav class="navbar navbar-expand-xl navbar-light bg-light fixed-top navbar-size shadow-sm">
+        <a class="navbar-brand" href="#"><img class="logo" src="assets/logo.png"></a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
             <span class="navbar-toggler-icon"></span>
         </button> 
 
-        <div class="collapse navbar-collapse" id="navb">
+        <div class="collapse navbar-collapse bg-light" id="navb">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Home</a>
@@ -82,10 +83,34 @@
             </ul>
             <ul class="navbar-nav ml-auto nav-flex-icons">
                 <form class="form-inline mr-5">
-                    <input class="form-control mr-sm-2" type="text">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
                 </form>
-                <li class="nav-item mt-1">
-                    <label class="nav-link"><img src=<?php while($fila = mysqli_fetch_array($resultado_imagenPerfil)){ echo $fila['IMAGEN_PERFIL']; }?> class="rounded-circle z-depth-0 size1 ml-2" alt="avatar image"></label>
+                <li class="nav-item mt-1 user-info">             
+                        <?php
+                            
+                            $servername = "localhost";
+                            $db_username = "root";
+                            $db_password = "";
+                            $db_name = "retropanda";
+
+                            $connection = mysqli_connect($servername,$db_username,$db_password,$db_name);
+
+                            if(!isset($_SESSION)){
+                                $userid = $_SESSION["user"];
+                                $query = "SELECT USERNAME, IMAGEN_PERFIL FROM USUARIO WHERE ID_USUARIO = '$userid'";
+
+                                if($result = mysqli_query($connection,$query)){
+                                    echo "<label class='nav-link'>";
+                                    while ($row = mysqli_fetch_row($result)) {
+                                        echo "$row[0]<img src='$row[1]' class='rounded-circle z-depth-0 size1 ml-2' alt='avatar image'></label>";
+                                    }
+                                    echo "</label>";
+                                }
+                            } else{
+                                echo "<a href='../login/login.html'>Log In</a>";
+                            }
+                        ?>
+                    
                 </li>
             </ul>
         </div>
@@ -128,7 +153,7 @@
 
             <h3>Feed</h3>
 
-            <input type="button" value="Add Feed">
+            <input type="button" value="Add Feed" id="btn">
 
         </div>
 
@@ -158,7 +183,7 @@
 
     </div>
     
-    <div id="añadirReseña" class="cajaVisible">
+    <div id="añadirReseña" class="cajaInvisible">
 
         <form action="añadirReseña.php" method="REQUEST">
 
