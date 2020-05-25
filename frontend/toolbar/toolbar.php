@@ -15,7 +15,7 @@ session_start();
 </head>
 <body>
     <nav class="navbar navbar-expand-xl navbar-light bg-light fixed-top navbar-size shadow-sm">
-        <a class="navbar-brand" href="#"><img class="logo" src="../../assets/logo.png"></a>
+        <a class="navbar-brand" href="#"><img class="logo" src="/assets/logo.png"></a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
             <span class="navbar-toggler-icon"></span>
         </button> 
