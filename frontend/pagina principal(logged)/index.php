@@ -17,7 +17,7 @@
 
         session_start();
 
-        $usuario = 'misterius563';
+        $usuario = 'juanmaco';
         $_SESSION['user'] = $usuario;
         $servername = "localhost";
         $database = "retropanda";
@@ -134,21 +134,23 @@
 
         <?php
 
-            $consulta_comentarios = "SELECT U.USERNAME J.CARATULA, J.NOMBRE, V.VALORACION FROM J JUEGO, V JUEGO_USUARIO_VALORACION, U USUARIO WHERE V.ID_USUARIO = U.ID_USUARIO AND V.ID_JUEGO = J.ID_JUEGO";
+            $consulta_comentarios = "SELECT usuario.USERNAME,juego.NOMBRE,valoracion_juego_usuario.COMENTARIO
+            FROM `usuario`,`valoracion_juego_usuario`,`juego`
+            WHERE valoracion_juego_usuario.ID_JUEGO=juego.ID_JUEGO AND valoracion_juego_usuario.ID_USUARIO=usuario.ID_USUARIO;";
             $resultado_comentarios = mysqli_query($conn,$consulta_comentarios);
 
             while ($celda = mysqli_fetch_array($resultado_comentarios)){
+                ?>  
+            <div style="border-color: green;border-width: 7px;border-bottom-style: solid;">
+                <h2>Usuario</h2>
+                <h4 style="color:blue"><?php echo $celda['USERNAME']?></h4>
+                <h2>Juego</h2>
+                <h4 style="color:blue"><?php echo $celda['NOMBRE']?></h4>
+                <h2>Valoracion</h2>
+                <h4 style="color:blue"><?php echo $celda['COMENTARIO']?></h4>
 
-                echo "<div class=comentario>".
-                    "<h2>Usuario</h2>".
-                    "<h4>".$celda['USERNAME']."</h4>".
-                    "<h2>Juego</h2>".
-                    "<img src=".$celda['CARATULA'].">".
-                    "<h3> Nombre: ".$celda['NOMBRE']."</h3>".
-                    "<h2>Valoracion</h2>".
-                    "<p>".$celda['VALORACION']."</p>".
-                    "</div>";
-
+            </div>
+            <?php
             } 
 
         ?>
