@@ -24,7 +24,6 @@ if($result = mysqli_query($connection,$query)){
     $row = mysqli_num_rows($result);
     
     if($row == 1){
-        session_start();
         while($fetch = mysqli_fetch_row($result)){
             $_SESSION["admin"] = $fetch[0];
         }
