@@ -9,15 +9,14 @@ session_start();
     $connection = mysqli_connect($servername,$db_username,$db_password,$db_name);
 
     if(!isset($_SESSION["admin"])){
-        $gameID = $_REQUEST['gameid'];
-        $title = $_REQUEST['title'];
-        $cover = $_REQUEST['cover'];
-        $gender = $_REQUEST['gender'];
-        $year = $_REQUEST['year'];
-        $dev = $_REQUEST['developer'];
-        $plat = $_REQUEST['platform'];
+        $modid = $_REQUEST['modid'];
+        $username = $_REQUEST['username'];
+        $pass = $_REQUEST['password'];
+        $email = $_REQUEST['email'];
+        $prof = $_REQUEST['url'];
+        $bib = $_REQUEST['bibliografia'];
 
-        $query = "UPDATE JUEGO SET `NOMBRE` = '$title', `CARATULA` = '$cover', `GENERO1` = '$gender', `FECHA_PUBLICACION` = '$year-01-01', `ID_DESARROLLADORA` = '$dev' WHERE ID_JUEGO = '$gameID'";
+        $query = "UPDATE USUARIO SET `USERNAME` = '$username', `PASS` = '$pass', `EMAIL` = '$email', `IMAGEN_PERFIL` = '$prof', `BIOGRAFIA` = '$bib' WHERE ID_USUARIO = '$modid'";
 
     if(mysqli_query($connection,$query)){
         echo "Añadido correctamente";

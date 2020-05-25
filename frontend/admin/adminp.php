@@ -17,6 +17,16 @@
         function modGameSubmit(){
             document.querySelector('.modGame').submit();
         }
+        function addGame(){
+            document.querySelector('.addGameFormulario').submit();
+        }
+        function updateCover(){
+            let url = document.querySelector('.artURL');
+            document.querySelector('.addArt').setAttribute('src', url);
+        }
+        function submitModUser(){
+            document.querySelector('.modUser').submit();
+        }
     </script>
 </head>
 <body class="bg-dark">
@@ -65,14 +75,14 @@
             <class class="row">
 
                 <div class="col-sm4">
-                    <img class="art" src="https://static.posters.cz/image/750/poster/super-mario-bros-3-nes-cover-i20784.jpg" alt="">
+                    <img class="art addArt" src="" alt="">
                 </div>
                 <div class="col-sm4">
                     <div class="addGameForm">
-                        <form action="addGame.php">
+                        <form action="addGame.php" class="addGameFormulario">
                             <div class="form-group">
                                 <input class="form-control" type="text" name="title" placeholder="Título"><br>
-                                <input class="form-control" type="text" name="cover" placeholder="URL Cover">
+                                <input class="form-control artURL" type="text" name="cover" placeholder="URL Cover" onchange="updateCover()">
                                 <label>Género:</label>
                                 <select class="form-control" name="gender" placeholder="Género">
                                     <option value="ACCIÓN">Acción</option>
@@ -85,7 +95,13 @@
                                     <option value="ROL">Rol</option>
                                 </select>
                                 <label>Year:</label>
-                                <select class="form-control" name="year"></select>
+                                <?php
+                                    echo "<select class='form-control' name='year'>";
+                                    for ($i=1950; $i <= date("Y"); $i++) { 
+                                        echo "<option value='$i'>$i</option>";
+                                    }
+                                    echo "</select>";
+                                ?>
                                 <label>Región:</label>
                                 <div class="form-check-inline">
                                     <label class="form-check-label">
@@ -96,16 +112,37 @@
                                     </label>
                                   </div>
                             </div>
-                            <input class="form-control" type="text" name="developer" placeholder="Desarrolladora">
+                            <label>Desarrolladora:</label>
+                            <?php
+                                echo "<select class='form-control' name='developer'>";
+                                $innerQuery = "SELECT EMPRESA.NOMBRE_EMPRESA, DESARROLLADORA.ID_DESARROLLADORA FROM DESARROLLADORA, EMPRESA WHERE EMPRESA.ID_EMPRESA = DESARROLLADORA.ID_DESARROLLADORA";
+
+                                if($innerQResult = mysqli_query($connection,$innerQuery)){
+                                    while($fetchInnerQ = mysqli_fetch_row($innerQResult)){
+                                        echo "<option value='$fetchInnerQ[1]'>$fetchInnerQ[0]</option>";
+                                    }
+                                }
+                            echo "</select>";
+                            ?>
                             <label>Plataforma:</label>
-                            <select class="form-control" name="platform"></select>
+                            <?php
+                                echo "<select class='form-control' name='platform'>";
+                                $innerQuery = "SELECT ID_PLATAFORMA, NOMBRE FROM PLATAFORMA";
+
+                                if($innerQResult = mysqli_query($connection,$innerQuery)){
+                                    while($fetchInnerQ = mysqli_fetch_row($innerQResult)){
+                                        echo "<option value='$fetchInnerQ[0]'>$fetchInnerQ[1]</option>";
+                                    }
+                                }
+                            echo "</select>";
+                            ?>
                         </form>
                         
                     </div>
                     
                 </div>
                 <div class="col-sm2 submitbtn-area">
-                    <button type="button" class="btn btn-primary btn-lg submitbtn">Añadir</button>
+                    <button type="submit" class="btn btn-primary btn-lg submitbtn" onclick="addGame()">Añadir</button>
                 </div>
         </div>
 
@@ -116,25 +153,52 @@
                 
                 <div class="col-sm4">
                     <div class="changeUserForm">
-                        <form action="changeUser.php">
-                            <div class="form-group">
-                                <select name="user">
-                                    
+                        <form action="#" method="post" onchange="submit()">
+                            <select name="user">
+                                <?php
+                                    $usertomodID = $_REQUEST['user'];
+                                    $query = "SELECT ID_USUARIO, USERNAME FROM USUARIO";
+                                    if($result = mysqli_query($connection, $query)){
+                                        while($fetch = mysqli_fetch_row($result)){
+                                            echo "<option value='$fetch[0]'>$fetch[1]</option>";
+                                        }
+                                    }
+                                ?>
                                 </select>
+                        </form>
+                        <form action="changeUser.php" method="post" class="modUser">
+                            <div class="form-group">
+                                <!--Example of userinfochangefrom
                                 <input class="form-control" type="text" name="username" placeholder="Username"><br>
                                 <input class="form-control" type="password" name="password" placeholder="Password"><br>
                                 <input class="form-control" type="text" name="email" placeholder="E-mail"><br>
-                                <input class="form-control" type="text" name="email" placeholder="URL imagen de perfil"><br>
-                                <textarea name="bibliografia" cols="32" rows="5" placeholder="Bibliografía"></textarea>
+                                <input class="form-control" type="text" name="url" placeholder="URL imagen de perfil"><br>
+                                <textarea name="bibliografia" cols="32" rows="5" placeholder="Bibliografía"></textarea>-->
+                                <?php
+                                    $query = "SELECT ID_USUARIO, USERNAME, EMAIL, IMAGEN_PERFIL, BIOGRAFIA FROM USUARIO WHERE ID_USUARIO = $usertomodID";
+                                    if($result = mysqli_query($connection, $query)){
+                                        while ($fetch = mysqli_fetch_row($result)){
+                                            $img = $fetch[3];
+                                            echo "<input type='text' name='modid' value='$fetch[0]' hidden>";
+                                            echo "<input class='form-control' type='text' name='username' placeholder='Username' value=$fetch[1]><br>";
+                                            echo "<input class='form-control' type='password' name='password' placeholder='Password'><br>";
+                                            echo "<input class='form-control' type='text' name='email' placeholder='E-mail' value='$fetch[2]'><br>";
+                                            echo "<input class='form-control' type='text' name='url' placeholder='URL imagen de perfil' value='$fetch[3]'><br>";
+                                            echo "<textarea name='bibliografia' cols='32' rows='5' placeholder='Bibliografía' value='$fetch[4]'></textarea>";
+                                        }
+                                    }
+                                ?>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="col-sm4">
-                    <img class="profilePic" src="https://static.posters.cz/image/750/poster/super-mario-bros-3-nes-cover-i20784.jpg" alt="">
+                    <?php
+                        echo "<img class='profilePic' src='$img'>";
+                    ?>
                 </div>
                 <div class="col-sm2 submituserbtn-area">
-                    <button type="button" class="btn btn-primary btn-lg submituserbtn">Modificar</button>
+                    <button type="button" class="btn btn-primary btn-lg submituserbtn" onclick="submitModUser()">Modificar</button>
                 </div>
             </div>
 

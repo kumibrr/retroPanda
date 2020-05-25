@@ -1,6 +1,5 @@
 <?php
-
-    $userid = $_SESSION["admin"];
+session_start();
     $servername = "localhost";
     $db_username = "root";
     $db_password = "";
@@ -13,33 +12,21 @@
         $cover = $_REQUEST['cover'];
         $gender = $_REQUEST['gender'];
         $year = $_REQUEST['year'];
-        $pal = $_REQUEST['pal'];
-        $jap = $_REQUEST['jap'];
-        $ntsc = $_REQUEST['ntsc'];
-        $aus = $_REQUEST['aus'];
         $dev = $_REQUEST['developer'];
         $plat = $_REQUEST['platform'];
-    }
-
-    $query = "SELECT DESARROLLADORA.ID_DESARROLLADORA FROM DESARROLLADORA, EMPRESA WHERE DESARROLLADORA.ID_DESARROLLADORA = EMPRESA.ID_EMPRESA AND EMPRESA.NOMBRE_EMPRESA = '$dev'";
-
-    if($result = mysqli_query($connection, $query)){
-        $num_rows = mysqli_num_rows($result);
-
-        if($num_rows == 1){
-            while($fetch = mysqli_fetch_row($result)){
-                $idDev = $fetch[0];
-            }
-        } else{
-            echo "error fatal";
+        $idDev = $_REQUEST['developer'];
+    
+        $query = "INSERT INTO JUEGO (NOMBRE, GENERO1, FECHA_PUBLICACION, CARATULA, ID_DESARROLLADORA) VALUES ('$title','$gender','$year-01-01','$cover','$idDev')";
+    
+        if(mysqli_query($connection,$query)){
+            echo "Añadido correctamente";
             header("location: adminp.php");
+        } else{
+            echo "??";
         }
+    } else{
+        header("location: loginadmin.html");
     }
 
-    $query = "INSERT INTO JUEGO(NOMBRE, GENERO1, FECHA_PUBLICACION, REGION1, REGION2, REGION3, REGION4, CARATULA, DESARROLLADORA) VALUES ('$title','$gender','$year-01-01','$pal','$jap','$ntsc','$aus','$cover','$idDev')";
 
-    if(mysqli_query($connection,$query)){
-        echo "Añadido correctamente";
-        header("location: adminp.php");
-    }
 ?>
