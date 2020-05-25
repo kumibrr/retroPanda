@@ -2,3 +2,21 @@
     width: 30px;
     height: 30px;
 }
+
+nav{
+
+    margin-bottom: 5%;
+
+}
+
+.cajaInvisible{
+
+    display:none;
+
+}
+
+.cajaVisible{
+
+    display:contents;
+
+}

@@ -17,8 +17,8 @@
 
         session_start();
 
-        $usuario = "misterius563";
-        $_SESSION['USUARIO'] = $usuario;
+        $usuario = 'misterius563';
+        $_SESSION['user'] = $usuario;
         $servername = "localhost";
         $database = "retropanda";
         $username = "root";
@@ -37,13 +37,13 @@
 
         while ($celda = mysqli_fetch_array($resultado_usuario)){
 
-            if ($_SESSION['USUARIO']==$celda['USERNAME']){
+            if ($_SESSION['user']==$celda['USERNAME']){
 
-                $usuario = $celda['USERNAME'];
+                $contador = 1;
 
             }
-            
-            if ($usuario==""){
+
+            if ($contador = 0){
 
                 header("Location: http://localhost/dashboard/proyecto/nologged/");
                 exit;
@@ -51,6 +51,11 @@
             }
 
         }
+
+        //CONSULTA IMAGEN PERFIL
+
+        $consulta_imagenPerfil = "SELECT IMAGEN_PERFIL FROM USUARIO WHERE USERNAME = ".$_SESSION['user']."";
+        $resultado_imagenPerfil = mysqli_query($conn,$consulta_imagenPerfil);
 
     ?>
 
@@ -80,7 +85,7 @@
                     <input class="form-control mr-sm-2" type="text">
                 </form>
                 <li class="nav-item mt-1">
-                    <label class="nav-link">username<img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" class="rounded-circle z-depth-0 size1 ml-2" alt="avatar image"></label>
+                    <label class="nav-link"><img src=<?php while($fila = mysqli_fetch_array($resultado_imagenPerfil)){ echo $fila[0]; }?> class="rounded-circle z-depth-0 size1 ml-2" alt="avatar image"></label>
                 </li>
             </ul>
         </div>
@@ -98,7 +103,7 @@
 
             //CONSULTA BASE DE DATOS: WISHLIST 
 
-            $consulta_wishlist = "SELECT J CARATULA, J NOMBRE, J GENERO1, J FECHA_PUBLICACION, J REGION1 FROM J JUEGO, JU JUEGO_USUARIO_WISHLIST WHERE JU ID_USUARIO == (SELECT ID_USUARIO FROM USUARIO WHERE USERNAME == ".$usuario.") AND JU ID_JUEGO == J ID_JUEGO ";
+            $consulta_wishlist = "SELECT JUEGO.CARATULA, JUEGO.NOMBRE, JUEGO.GENERO1, JUEGO.FECHA_PUBLICACION, JUEGO.REGION1 FROM JUEGO, JUEGO_USUARIO_WISHLIST WHERE JUEGO_USUARIO_WISHLIST.ID_USUARIO LIKE (SELECT USUARIO.ID_USUARIO FROM USUARIO WHERE USUARIO.USERNAME LIKE '.$usuario.') AND JUEGO_USUARIO_WISHLIST.ID_JUEGO LIKE JUEGO.ID_JUEGO";
             $resultado_wishlist = mysqli_query($conn,$consulta_wishlist);
 
             while ($celda = mysqli_fetch_array($resultado_wishlist)){
@@ -129,7 +134,7 @@
 
         <?php
 
-            $consulta_comentarios = "SELECT U USERNAME J CARATULA, J NOMBRE, V VALORACION FROM J JUEGO, V JUEGO_USUARIO_VALORACION, U USUARIO WHERE V ID_USUARIO == U ID_USUARIO AND V ID_JUEGO == J ID_JUEGO";
+            $consulta_comentarios = "SELECT U.USERNAME J.CARATULA, J.NOMBRE, V.VALORACION FROM J JUEGO, V JUEGO_USUARIO_VALORACION, U USUARIO WHERE V.ID_USUARIO = U.ID_USUARIO AND V.ID_JUEGO = J.ID_JUEGO";
             $resultado_comentarios = mysqli_query($conn,$consulta_comentarios);
 
             while ($celda = mysqli_fetch_array($resultado_comentarios)){
@@ -150,28 +155,36 @@
 
     </div>
     
-    <div id="añadirComentario" class="cajaInvisible">
+    <div id="añadirReseña" class="cajaInvisible">
 
-        <h2>Review</h2>
-        <h3>Game:</h3>
-        <select class="juegoSelect">
-            <?php
+        <form action="añadirReseña.php" method="REQUEST">
 
-                $consulta_juego = "SELECT ID_JUEGO, CARATULA, NOMBRE FROM JUEGO";
-                $resultado_juego = mysqli_query($conn, $consulta_juego);
+            <h2>Review</h2>
+            <h3>Game:</h3>
+            <select id="juegoReseña" class="juegoSelect">
 
-                while ($celda = mysqli_fetch_array($resultado_comentario)){
+                <?php
 
-                    echo "<option data-icon=".$celda['CARATULA']." value=".$celda['ID_JUEGO'].">".$celda['NOMBRE']."</option>";
-    
-                }
+                    $consulta_juego = "SELECT ID_JUEGO, CARATULA, NOMBRE FROM JUEGO";
+                    $resultado_juego = mysqli_query($conn, $consulta_juego);
 
-            ?>
-        </select>
+                    while ($celda = mysqli_fetch_array($resultado_juego)){
 
-        <h3>Valoración:</h3>
+                        echo "<option style='background-url:".$celda['CARATULA'].";' value=".$celda['ID_JUEGO'].">".$celda['NOMBRE']."</option>";
+        
+                    }
 
-        <textarea id="valoracion" maxlength="100" cols="50">Introduzca su reseña aqui</textarea>
+                ?>
+
+            </select>
+
+            <h3>Valoración:</h3>
+
+            <textarea id="valoracion" maxlength="100" cols="50">Introduzca su reseña aqui</textarea>
+
+            <input type="submit" value="Enviar Reseña">
+
+        <form>
 
     </div>
 
