@@ -14,10 +14,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css.css">
     <link rel="stylesheet" href="../toolbar/toolbar.css">
+    
 </head>
 <body>
 <nav class="navbar navbar-expand-xl navbar-light bg-light fixed-top navbar-size shadow-sm">
-        <a class="navbar-brand" href="#"><img class="logo" src="../../assets/logo.png"></a>
+        <a class="navbar-brand" href="#"><img class="logo" src="assets/logo.png"></a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
             <span class="navbar-toggler-icon"></span>
         </button> 
@@ -70,6 +71,8 @@
     </nav>
     
     
+    
+    
     <div style="text-align:center; padding-top:6%;border-bottom:green;">
     <h1  style="text-align:left;color:red">Wanted</h1>
         <?php
@@ -78,14 +81,16 @@
 
         $resultado = mysqli_query( $connection, $consulta ) or die ( "Algo ha ido mal en la consulta $consulta");
         while ($mostrar=mysqli_fetch_array($resultado)) {
-            ?>
-            <div style="float:left">
-            <img src=<?php echo $mostrar['CARATULA']?> style="width:30%">
-            <h2><?php echo $mostrar['NOMBRE']?></h1>
-            <h4><?php echo $mostrar['GENERO1']?></p>
-            <h5><?php echo $mostrar['FECHA_PUBLICACION']?></p>
-            <h5> Pais: <?php echo $mostrar['REGION1']?></p>
 
+            ?>
+            <div onclick="addJuego()" style="float:left">
+                <img  src=<?php echo $mostrar['CARATULA']?> style="width:30%">
+                <h2><?php echo $mostrar['NOMBRE']?></h1>
+                <h4><?php echo $mostrar['GENERO1']?></p>
+                <h5><?php echo $mostrar['FECHA_PUBLICACION']?></p>
+                <h5> Pais: <?php echo $mostrar['REGION1']?></p>
+
+            
             </div>
         
         <?php
@@ -107,7 +112,7 @@
         $resultado = mysqli_query( $connection, $consulta ) or die ( "Algo ha ido mal en la consulta $consulta");
         while ($mostrar=mysqli_fetch_array($resultado)) {
             ?>
-            <div style="border-color: green;border-width: 7px;border-bottom-style: solid;">
+            <div  style="border-color: green;border-width: 7px;border-bottom-style: solid;">
                 <h2>Usuario</h2>
                 <h4 style="color:blue"><?php echo $mostrar['USERNAME']?></h4>
                 <h2>Juego</h2>
@@ -157,5 +162,7 @@
 		</div>
 		
 		</footer>
+
+    
 </body>
 </html>

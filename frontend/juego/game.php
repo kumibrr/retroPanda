@@ -97,7 +97,7 @@ session_start();
                 }
             ?>
             <button class="btn btn-primary" onclick="addToLibrary()">Añadir a mi librería</button>
-            <button class="btn btn-secondary" onclick="addToWishlist()">Añadir a mi librería</button>
+            <button class="btn btn-secondary" onclick="addToWishlist()">Añadir a mi WhishList</button>
         </div>
         <div class="col-sm3 info">
             <!--Example of info
