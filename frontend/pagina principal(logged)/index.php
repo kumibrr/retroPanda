@@ -223,5 +223,38 @@
 
     ?>
 
+    
+<footer class="page footer center on small only unique color dark pt 8">
+		
+		<div class="container mt-5 mb-4 text-center text-md-left">
+		
+			<div class="row ml-3">
+			
+			<div class="col-ml-3 col-lg-4 col-xl-3 mb-r">
+				<h6 class="tittle font-bold"><strong>RetroPanda</strong></h6>
+				<hr class="red accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+				<p>La funcion de esta pagina es informar sobre videojuegos retro</p>
+			</div>
+			
+			<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-r">
+				<h6 class="tittle font-bold"><strong>Creadores</strong></h6>
+				<p><a href="#!">Abraham Diaz Mediavilla</a></p>
+				<p><a href="#!">Israel Barrera</a></p>
+				<p><a href="#!">Juan Manuel Cardenas Ortega</a></p>
+				<p><a href="#!">Antonio Real Chia</a></p>
+				<p><a href="#!">Guillermo Rodríguez Gallardo</a></p>
+			</div>
+			
+			<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-r">
+				<h6 class="tittle font-bold"><strong>Creadores</strong></h6>
+				<p><a href="#!">Numero Telefono: 659664433</a></p>
+				<p><a href="#!">Email: RetroPanda@gmail.com</a></p>
+				<p><a href="#!">Jerez de la Frontera</a></p>
+			</div>
+			
+		</div>
+		
+		</footer>
+
 </body>
 </html>
