@@ -59,9 +59,10 @@ session_start();
                                         echo "$row[0]<img src='$row[1]' class='rounded-circle z-depth-0 size1 ml-2' alt='avatar image'></label>";
                                     }
                                     echo "</label>";
+                                    echo "<a href='/login/log-out.php'>Log out</a>";
                                 }
                             } else{
-                                echo "<a href='../login/login.html'>Log In</a>";
+                                echo "<a href='/login/login.html'>Log In</a>";
                             }
                         ?>
                     
